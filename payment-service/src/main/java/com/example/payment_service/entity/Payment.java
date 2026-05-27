@@ -39,10 +39,15 @@ public class Payment {
 
     private Long orderId;
 
+    private String customerEmail;
+
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod method;
 
     @CreatedDate
     @Column(name = "payment_date", nullable = false, updatable = false)

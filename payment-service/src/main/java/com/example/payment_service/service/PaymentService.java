@@ -10,6 +10,7 @@ import com.example.payment_service.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,13 +22,11 @@ public class PaymentService {
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO) {
         Payment payment = new Payment();
 
-        payment.setOrderId(payment.getOrderId());
-        payment.setAmount(payment.getAmount());
-        payment.setMethod(payment.getMethod());
-        payment.setCustomerEmail(payment.getCustomerEmail());
+        payment.setOrderId(paymentRequestDTO.orderId());
+        payment.setAmount(paymentRequestDTO.amount());
+        payment.setMethod(paymentRequestDTO.method());
+        payment.setCustomerEmail(paymentRequestDTO.customerEmail());
 
-
-        payment.setStatus(PaymentStatus.PENDING);
 
         payment.setStatus(PaymentStatus.APPROVED);
 
@@ -43,7 +42,7 @@ public class PaymentService {
         return payments.stream().map(paymentMapper::ToResponse).toList();
     }
 
-    public PaymentResponseDTO findPaymentById(Long id){
+    public PaymentResponseDTO findPaymentById(UUID id){
         Payment payment = paymentRepository.findById(id)
                 .orElseThrow(()->
                 new PaymentNotFoundException

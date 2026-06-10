@@ -5,9 +5,10 @@ import com.example.payment_service.entity.PaymentStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record PaymentResponseDTO(Long id,
-                                 Long orderId,
+public record PaymentResponseDTO(UUID id,
+                                 UUID orderId,
                                  String customerEmail,
                                  BigDecimal amount,
                                  PaymentMethod method,

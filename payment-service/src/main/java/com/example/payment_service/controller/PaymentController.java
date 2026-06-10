@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/payments")
@@ -34,7 +35,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentResponseDTO> findPaymentById(@PathVariable Long id){
+    public ResponseEntity<PaymentResponseDTO> findPaymentById(@PathVariable UUID id){
         PaymentResponseDTO payment = paymentService.findPaymentById(id);
         return ResponseEntity.ok(payment);
     }

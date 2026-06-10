@@ -15,10 +15,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Entity
@@ -27,21 +28,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Table(name = "payments")
 public class Payment {
     @Id
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "payment_sequence"
-    )
-    @SequenceGenerator(
-            name = "payment_sequence",
-            sequenceName = "payment_sequence",
-            allocationSize = 1
-    )
-    private Long id;
+            strategy = GenerationType.UUID)
 
-    private Long orderId;
+    private UUID id;
+
+    private UUID orderId;
 
     private String customerEmail;
 
